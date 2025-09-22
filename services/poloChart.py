@@ -237,7 +237,7 @@ def get_processed_data():
 
 
 #  CREATE a new, unified endpoint
-@polo_chart_bp.route('/api/poles/comprehensive', methods=['GET'])
+@polo_chart_bp.route('/poles/comprehensive', methods=['GET'])
 def get_comprehensive_data():
     df_ead = get_processed_data()
     if df_ead is None:
@@ -284,7 +284,7 @@ def get_comprehensive_data():
     return jsonify(all_polo_data)
 
 # --- API Endpoint 2: Total Yearly Enrollments ---
-@polo_chart_bp.route('/api/matriculas/total_yearly', methods=['GET'])
+@polo_chart_bp.route('/matriculas/total_yearly', methods=['GET'])
 def get_total_yearly_matriculas():
     df_ead = get_processed_data()
     if df_ead is None:

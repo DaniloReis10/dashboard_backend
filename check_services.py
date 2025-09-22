@@ -37,6 +37,17 @@ def ok_enroll_polo_total(p): return has_keys_list(p, "name", "value")
 def ok_analysis_list(p): return is_list(p)
 def ok_analytics_health(p): return isinstance(p, dict) and p.get("ok") is True
 def ok_analytics_std(p): return isinstance(p, dict) and any(k in p for k in ("data","global","weekly","params"))
+def ok_polos_strings(p):
+    # /polos -> lista de strings
+    return isinstance(p, list) and all(isinstance(s, str) for s in p)
+
+def ok_poles_comprehensive(p):
+    # /api/poles/comprehensive -> lista de dicts com chaves essenciais
+    return has_keys_list(p, "id", "polo", "year", "frequenciaAbsoluta", "frequenciaRelativa")
+
+def ok_total_yearly_matriculas(p):
+    # /api/matriculas/total_yearly -> [{ano, total}]
+    return has_keys_list(p, "ano", "total")
 
 # ---------- Endpoints a testar ----------
 CHECKS = {
@@ -45,6 +56,10 @@ CHECKS = {
     "/matriculas?inicio=2010&fim=2025": ("matriculas", ok_matriculas),
     "/years_suap": ("years_suap", ok_years),
     "/studentbycities?inicio=2010&fim=2025&typelocal=estado": ("studentbycities", ok_studentbycities),
+    # === Novos microserviços ===
+    "/polos": ("polos", ok_polos_strings),  # :contentReference[oaicite:3]{index=3}
+    "/poles/comprehensive": ("poles.comprehensive", ok_poles_comprehensive),  # :contentReference[oaicite:4]{index=4}
+    "/matriculas/total_yearly": ("matriculas.total_yearly", ok_total_yearly_matriculas),  # :contentReference[oaicite:5]{index=5}
 
     # Opcionais (ok falhar se não existirem nesse deploy)
     "/enrollments/by_year": ("enrollments.by_year", ok_enroll_by_year),
@@ -59,6 +74,7 @@ CHECKS = {
     "/analytics_behavour/avg-session-time?start=2023-01-01&end=2024-01-31": ("analytics_behavour.avg_session_time", ok_analytics_std),
     "/analytics_behavour/activation": ("analytics_behavour.activation", ok_analytics_std),
 }
+
 
 CTX = ssl.create_default_context()
 
