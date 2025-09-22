@@ -8,19 +8,19 @@ load_dotenv() # This loads variables from a .env file
 bp = Blueprint("polos", __name__, url_prefix="/polos")
 
 # --- My Database Configuration ---
-DB_CONFIG = {
-    'user': os.getenv('DB_USER'),
-    'password':  os.getenv('DB_PASSWORD'),
-    'host': os.getenv('DB_HOST'),
-    'database': os.getenv('DB_NAME')
-}
-
 #DB_CONFIG = {
-#    "host": os.environ.get("DB_HOST", "200.129.17.231"),
-#    "user": os.environ.get("DB_USER", "danilo"),
-#    "password": os.environ.get("DB_PASS", "5yZ2UjcLA9SU6Rh1"),
-#    "database": os.environ.get("DB_NAME", "moodle"),
+#    'user': os.getenv('DB_USER'),
+#    'password':  os.getenv('DB_PASSWORD'),
+#    'host': os.getenv('DB_HOST'),
+#    'database': os.getenv('DB_NAME')
 #}
+
+DB_CONFIG = {
+    "host": os.environ.get("DB_HOST", "200.129.17.231"),
+    "user": os.environ.get("DB_USER", "danilo"),
+    "password": os.environ.get("DB_PASS", "5yZ2UjcLA9SU6Rh1"),
+    "database": os.environ.get("DB_NAME", "moodle"),
+}
 
 @bp.route("/", methods=["GET"], strict_slashes=False)
 @bp.route("", methods=["GET"])

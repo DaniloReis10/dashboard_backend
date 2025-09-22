@@ -14,12 +14,19 @@ load_dotenv() # This loads variables from a .env file
 polo_chart_bp = Blueprint('polo_chart_bp', __name__)
 
 # --- My Database Configuration ---
+#config = {
+#    'user': os.getenv('DB_USER'),
+#    'password':  os.getenv('DB_PASSWORD'),
+#    'host': os.getenv('DB_HOST'),
+#    'database': os.getenv('DB_NAME')
+#}
 config = {
-    'user': os.getenv('DB_USER'),
-    'password':  os.getenv('DB_PASSWORD'),
-    'host': os.getenv('DB_HOST'),
-    'database': os.getenv('DB_NAME')
+    "host": os.environ.get("DB_HOST", "200.129.17.231"),
+    "user": os.environ.get("DB_USER", "danilo"),
+    "password": os.environ.get("DB_PASS", "5yZ2UjcLA9SU6Rh1"),
+    "database": os.environ.get("DB_NAME", "moodle"),
 }
+
 
 # ADD this dictionary with pole coordinates
 POLE_COORDINATES = {
