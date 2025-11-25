@@ -17,6 +17,7 @@ def create_app():
     from services.analytics_behavour import bp as analytics_behavour_bp
     from services.polos import bp as polos_bp
     from services.campus import bp as campus_bp
+    from services.conclusoes_ano import bp as conclusoes_ano_bp
 
     app.register_blueprint(matriculas_bp)      # /matriculas
     app.register_blueprint(health_bp)          # /health
@@ -28,6 +29,7 @@ def create_app():
     app.register_blueprint(analytics_behavour_bp)  # /analytics_behavour
     app.register_blueprint(polos_bp)           # /polos
     app.register_blueprint(campus_bp)          # /campus
+    app.register_blueprint(conclusoes_ano_bp, name="conclusoes_ano", url_prefix="/conclusoes_ano")  # /conclusoes_ano
 
     return app
 
